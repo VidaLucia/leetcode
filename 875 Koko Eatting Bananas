@@ -1,0 +1,27 @@
+class Solution(object):
+    def minEatingSpeed(self, piles, h):
+        """
+        :type piles: List[int]
+        :type h: int
+        :rtype: int
+        """
+        # i sort it and then i run a binary search
+        l = 1
+        
+        res = max(piles)
+        r = res 
+        while l<=r:
+            m = (l+r)//2 # our k in this case
+            time = 0
+            for p in piles: # Grab every possible speed
+                time +=math.ceil(float(p)/m)
+            if time<=h:
+                res = m
+                r = m-1
+            else:
+                l = m+1
+        return res
+
+        
+
+# Hard for me, need to re-review and draw out
