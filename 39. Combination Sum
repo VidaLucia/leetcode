@@ -1,0 +1,24 @@
+class Solution(object):
+    def combinationSum(self, candidates, target):
+        """
+        :type candidates: List[int]
+        :type target: int
+        :rtype: List[List[int]]
+        """
+         # lets say we do a traversal based on candidates -> we basically iterate starting at i[0]
+        # we have a cumulative sum -> if the sum every reaches target we return and store it in a list
+        # need another method to do the traversal -> does that keep the list
+        answer = []
+        def backtrack(idx,comb,total):
+            if total == target:
+                answer.append(comb[:])
+                return
+            if total > target or idx >= len(candidates):
+                return
+            comb.append(candidates[idx])
+            backtrack(idx,comb,total+candidates[idx])
+            comb.pop()
+            backtrack(idx+1,comb,total)
+
+            return answer
+        return backtrack(0,[],0)

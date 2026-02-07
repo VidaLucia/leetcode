@@ -1,0 +1,27 @@
+class Solution(object):
+    def exist(self, board, word):
+        """
+        :type board: List[List[str]]
+        :type word: str
+        :rtype: bool
+        """
+        def traverse(idx,idy,idw):
+            if idw== len(word): # we reached end of word and it worked
+                return True
+            if idx < 0 or idx>= len(board) or idy<0 or idy>= len(board[0]) or board[idx][idy] != word[idw]:
+                return False
+            temp = board[idx][idy]
+            board[idx][idy]= ''
+
+            if traverse(idx+1,idy,idw+1) or traverse(idx-1,idy,idw+1) or traverse(idx,idy+1,idw+1) or traverse(idx,idy-1,idw+1):
+                return True
+            board[idx][idy] = temp
+            return False
+        for i in range(len(board)):
+            for j in range(len(board[0])):
+                if traverse(i,j,0):
+                    return True
+        return False
+
+
+# Just need to think of the concept of having to update board and then update it back to the original value when we are done with that path. This is a common concept in backtracking problems.
