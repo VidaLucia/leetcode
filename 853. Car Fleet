@@ -1,0 +1,17 @@
+class Solution(object):
+    def carFleet(self, target, position, speed):
+        """
+        :type target: int
+        :type position: List[int]
+        :type speed: List[int]
+        :rtype: int
+        """
+
+        cars = [[p,s] for p,s in zip(position,speed)] # we just have an array for position,speed
+        st = []
+
+        for p,s in sorted(cars)[::-1]: # start from reverse sorted by position
+            taken = float((target-p))/s # time taken (distance/speed)
+            if not st or taken > st[-1]: # if the stack is empty or time taken is longer than the end -> add it as a time taken
+                st.append(taken)
+        return len(st)
