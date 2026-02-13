@@ -37,3 +37,5 @@ class MedianFinder(object):
 # obj = MedianFinder()
 # obj.addNum(num)
 # param_2 = obj.findMedian()
+
+# did two differnet methods just need to know heappush
