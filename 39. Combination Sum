@@ -22,3 +22,4 @@ class Solution(object):
 
             return answer
         return backtrack(0,[],0)
+    # You use two recursive statements per and factor for both individually -> one is to check repeats one is to check next on list

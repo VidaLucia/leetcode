@@ -1,0 +1,35 @@
+class Solution(object):
+    def calcEquation(self, equations, values, queries):
+        """
+        :type equations: List[List[str]]
+        :type values: List[float]
+        :type queries: List[List[str]]
+        :rtype: List[float]
+        """
+        # equations which are just a,b
+        # values which at i should be a/b of equations
+        # a/b = 2
+        # b/c = 3
+        # we can have a case where there is no var -> case
+        g= defaultdict(list)
+        for (a,b),v in zip(equations,values):
+            g[a].append((b,v))
+            g[b].append((a,1.0/v))
+        # This should make a graph with edges v 
+        def f(src,dst,visited):
+            if src not in g or dst not in g:
+                return -1.0
+            if src == dst:
+                return 1.0
+            visited.add(src)
+            for neighbour,w in g[src]:
+                if neighbour in visited:
+                    continue
+                r = f(neighbour, dst,visited)
+                if r!=-1.0:
+                    return w* r
+            return -1.0
+        ans = []
+        for x,y in queries:
+            ans.append(f(x,y,set()))
+        return ans

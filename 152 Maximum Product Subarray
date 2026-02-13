@@ -1,0 +1,16 @@
+class Solution(object):
+    def maxProduct(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: int
+        """
+        # So i was thinking it should be [len(nums)] size array
+        ans = max(nums)
+        c_max = c_min = 1 # base point
+
+        for n in nums:
+            temp = c_max * n
+            c_max = max(temp, c_min*n,n)
+            c_min = min(temp, c_min*n,n)
+            ans = max(ans,c_max)
+        return ans

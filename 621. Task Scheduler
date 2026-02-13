@@ -1,0 +1,16 @@
+from collections import Counter
+class Solution(object):
+
+    def leastInterval(self, tasks, n):
+        """
+        :type tasks: List[str]
+        :type n: int
+        :rtype: int
+        """
+        # make a dict for tasks
+        # populate from most popular to least populated within interval n 
+        freq = Counter(tasks)
+        f_max = max(freq.values())
+        count_max = sum(1 for f in freq.values() if f == f_max)
+
+        return max(len(tasks), (f_max - 1) * (n + 1) + count_max)

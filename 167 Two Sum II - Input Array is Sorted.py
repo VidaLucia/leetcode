@@ -14,3 +14,4 @@ class Solution(object):
                 i = i+ 1
             else:
                 return [i+1,j+1]
+        
